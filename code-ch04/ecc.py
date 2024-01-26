@@ -7,7 +7,6 @@ import hmac
 
 from helper import encode_base58_checksum, hash160
 
-
 class FieldElement:
 
     def __init__(self, num, prime):
