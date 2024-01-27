@@ -2,6 +2,8 @@ from unittest import TestCase, TestSuite, TextTestRunner
 
 import hashlib
 
+from Crypto.Hash import RIPEMD160
+
 
 BASE58_ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
 
@@ -12,9 +14,14 @@ def run(test):
     TextTestRunner().run(suite)
 
 
+# def hash160(s):
+#     '''sha256 followed by ripemd160'''
+#     return hashlib.new('ripemd160', hashlib.sha256(s).digest()).digest()
 def hash160(s):
-    '''sha256 followed by ripemd160'''
-    return hashlib.new('ripemd160', hashlib.sha256(s).digest()).digest()
+    sha = hashlib.sha256(s).digest()
+    ripe = RIPEMD160.new()
+    ripe.update(sha)
+    return ripe.digest() 
 
 
 def hash256(s):
